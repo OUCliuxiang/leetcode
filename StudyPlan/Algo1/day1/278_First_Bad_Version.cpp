@@ -32,6 +32,32 @@
 class Solution {
 public:
     int firstBadVersion(int n) {
+        int under=1, upper=n, target=n;
         
+        while ( under <= upper){
+            
+            target = under + (upper - under) / 2;
+            
+            if ( target == 1 and isBadVersion( target) )
+                return target;
+            
+            if ( isBadVersion( target)){
+                if ( !isBadVersion( target - 1)){
+                    return target;
+                }
+                else{
+                    upper = target - 1;
+                }
+            }
+            else{
+                if ( isBadVersion( target + 1)){
+                    return target + 1;
+                }
+                else{
+                    under = target + 1;
+                }
+            }
+        }
+        return 0;
     }
 };
