@@ -74,4 +74,21 @@ public:
         }
         return root;
     }
+
+    Node* connect_discuss(Node* root) {
+        if (!root) return root;
+        Node* currNode = root;
+        while(currNode -> left){
+            currNode -> left -> next = currNode -> right;
+            Node* p = currNode;
+            while(p -> next){
+                p -> right -> next = p -> next -> left;
+                p = p -> next;
+                p -> left -> next = p -> right;
+            }
+            p -> next = NULL;
+            currNode = currNode -> left;
+        }
+        return root;
+    }
 };
