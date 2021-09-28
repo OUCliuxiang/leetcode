@@ -34,6 +34,11 @@ public:
         res.assign(se.begin(), se.end());
         return res;
     }
+    vector<string> letterCasePermutation_discuss(string s) {
+        vector<string> res;
+        helper_discuss(0, s, res);
+        return res;
+    }
 private:
     void helper(int idx, string& s, vector<string>& res){
         if(idx == s.size()){
@@ -53,5 +58,24 @@ private:
             s[i] = tmp;
             helper(i+1, s, res);
         }
+    }
+
+    void helper_discuss(int idx, string& s, vector<string>& res){
+        if(idx == s.size()){
+            res.push_back(s);
+            return;
+        }
+        helper(idx+1, s, res);
+        if (s[idx] >= 'A' && s[idx] <= 'Z'){
+            s[idx] += 32;
+            helper(idx+1, s, res);
+            // s[idx] -= 32;
+        }
+        else if (s[idx] >= 'a' && s[idx] <= 'z'){
+            s[idx] -= 32;
+            helper(idx+1, s, res);
+            // s[idx] += 32;
+        }
+        // helper(idx + 1, s, res);
     }
 };
